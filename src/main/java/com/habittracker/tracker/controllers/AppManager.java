@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import static com.habittracker.tracker.habit.Habit.iconList;
-import static com.habittracker.tracker.user.User.habitList;
+
 
 public class AppManager {
 

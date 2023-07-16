@@ -3,7 +3,7 @@ package com.habittracker.tracker.ui;
 import com.habittracker.tracker.habit.Habit;
 import com.habittracker.tracker.interfaces.UserInterface;
 
-import static com.habittracker.tracker.user.User.habitList;
+
 
 public class TerminalUI implements UserInterface {
     @Override
@@ -72,11 +72,32 @@ public class TerminalUI implements UserInterface {
 
     @Override
     public void displayLogin() {
-        return;
+        System.out.println("""
+                
+                --------------------------------
+                 Login
+                --------------------------------
+                1 - Email
+                2 - Password
+                3 - Login
+                4 - Sign-up
+                f - Exit program
+                --------------------------------""");
     }
 
     @Override
     public void displaySignUp() {
-        return;
+        System.out.println("""
+                
+                --------------------------------
+                 Sign-up
+                --------------------------------
+                1 - Name
+                2 - Email
+                3 - Password
+                4 - Sign up
+                5 - Login
+                f - Exit program
+                --------------------------------""");
     }
 }

@@ -25,9 +25,9 @@ public class User {
     private String pass; // todo is password included here?
 
     //List<Habit> habitList = repository.getHabitList();
-    public static ArrayList<Habit> habitList = new ArrayList<>();
+    //public static ArrayList<Habit> habitList = new ArrayList<>();
 
-    public static ArrayList<User> friendList = new ArrayList<>();
+    //public static ArrayList<User> friendList = new ArrayList<>();
 
     public User() {
     }
@@ -104,11 +104,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name=" + name +
-                ", email=" + email +
-                ", pass=" + pass +
-                "}";
+        return  "ID: " + getUserId() + "\n" +
+                "Name: " + getName() + "\n" +
+                "Email: " + getEmail() + "\n" +
+                "Password: " + getPass() + "\n" +
+                 "--------------------------------";
     }
 }

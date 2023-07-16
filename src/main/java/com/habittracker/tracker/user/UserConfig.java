@@ -1,9 +1,11 @@
 package com.habittracker.tracker.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import com.habittracker.tracker.controllers.UserManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -11,7 +13,8 @@ import java.util.List;
 public class UserConfig {
 
     @Bean
-    CommandLineRunner userCommandLineRunner(UserRepository repository) {
+
+    CommandLineRunner userRunner(UserRepository repository, UserService userService, CommandLineRunner habitRunner) {
         return args -> {
             User connor = new User(
                     "Connor",
@@ -22,14 +25,18 @@ public class UserConfig {
 
             User alex = new User(
                     "Alex",
-                    "alex@gmail.com",
-                    "Pass123"
+                    "alex@hotmail.com",
+                    "Password1"
 
             );
 
             repository.saveAll(
                     List.of(connor, alex)
             );
+
+            UserManager userManager = new UserManager(repository, userService, habitRunner);
+            userManager.loginMenu();
+
         };
     }
 }

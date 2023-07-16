@@ -27,6 +27,7 @@ public class UserService {
     public void addNewUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
         if (userOptional.isPresent()) {
+            System.out.println("Email already taken. Please try again");
             throw new IllegalStateException("Email taken");
         }
         // if email is not present then saves user
