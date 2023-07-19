@@ -30,7 +30,6 @@ public class HabitConfig {
 //        };
 //    }
     @Bean
-
     CommandLineRunner HabitRunner(HabitRepository repository, HabitService habitService) {
         return args -> {
             AppManager appManager = new AppManager(repository, habitService);

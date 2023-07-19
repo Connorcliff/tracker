@@ -34,13 +34,24 @@ public class HabitService {
         habitRepository.save(habit);
     }
 
-    public void deleteHabit(String habitName) {
-        Optional<Habit> habitOptional = habitRepository.findHabitByName(habitName);
-        if (habitOptional.isEmpty()) {
-            throw new IllegalStateException("Habit with name " + habitName + " does not exist");
-        }
-        habitRepository.delete(habitOptional.get());
+    /** console version */
+//    public void deleteHabit(String habitName) {
+//        Optional<Habit> habitOptional = habitRepository.findHabitByName(habitName);
+//        if (habitOptional.isEmpty()) {
+//            throw new IllegalStateException("Habit with name " + habitName + " does not exist");
+//        }
+//        habitRepository.delete(habitOptional.get());
+//    }
+
+        public void deleteHabit(Long habitId) {
+            boolean exists = habitRepository.existsById(habitId);
+            if (!exists) {
+                throw new IllegalStateException(
+                        "Habit with id " + habitId + " does not exist");
+            }
+            habitRepository.deleteById(habitId);
     }
+
 
 
     public Optional<Habit> getHabitByName(String name) {
@@ -48,7 +59,7 @@ public class HabitService {
     }
 
     @Transactional
-    public void updateHabit(Long habitId, String name, String des, String icon, LocalTime reminder, int streak) {
+    public void updateHabit(Long habitId, String name, String des, String icon, LocalTime reminder, Integer streak) {
         Habit habit = habitRepository.findById(habitId)
                 .orElseThrow(() -> new IllegalStateException(
                         "habit with id " + habitId + " does not exist"));
@@ -71,7 +82,7 @@ public class HabitService {
         if (reminder != null && !Objects.equals(habit.getReminder(), reminder)) {
             habit.setReminder(reminder);
         }
-        if (streak > 0) { // maybe update condition?
+        if (streak != null) { // maybe update condition?
             habit.setStreak(streak);
         }
 

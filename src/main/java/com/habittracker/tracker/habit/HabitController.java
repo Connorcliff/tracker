@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/habit")
+@CrossOrigin
 public class HabitController {
 
     private final HabitService habitService;
@@ -29,10 +30,17 @@ public class HabitController {
         habitService.addNewHabit(habit);
     }
 
+    /** console version */
+//    @DeleteMapping(path = "{habitId}")
+//    public void deleteHabit(@PathVariable("habitId") String habitName) {
+//        habitService.deleteHabit(habitName);
+//    }
+
     @DeleteMapping(path = "{habitId}")
-    public void deleteHabit(@PathVariable("habitId") String habitName) {
-        habitService.deleteHabit(habitName);
+    public void deleteHabit(@PathVariable("habitId") Long habitId) {
+        habitService.deleteHabit(habitId);
     }
+
 
     // update information
     @PutMapping(path = "{habitId}")
@@ -42,7 +50,7 @@ public class HabitController {
             @RequestParam(required = false) String description,
             @RequestParam(required = false) String icon,
             @RequestParam(required = false) LocalTime reminder,
-            @RequestParam(required = false) int streak
+            @RequestParam(required = false) Integer streak
             ){
         habitService.updateHabit(habitId, name, description, icon, reminder, streak);
     }

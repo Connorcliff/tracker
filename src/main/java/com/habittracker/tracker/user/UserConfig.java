@@ -13,21 +13,18 @@ import java.util.List;
 public class UserConfig {
 
     @Bean
-
     CommandLineRunner userRunner(UserRepository repository, UserService userService, CommandLineRunner habitRunner) {
         return args -> {
             User connor = new User(
                     "Connor",
                     "connor@gmail.com",
                     "Pass123"
-
             );
 
             User alex = new User(
                     "Alex",
                     "alex@hotmail.com",
                     "Password1"
-
             );
 
             repository.saveAll(

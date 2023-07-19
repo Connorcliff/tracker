@@ -151,16 +151,15 @@ public class AppManager {
     }
 
     private String checkDescription(String des) {
-        String checkedDes = null;
+        String checkedDes = "";
 
         // Validates user input
-        if (des == null || des.trim().isEmpty() || des.equals("\n")) {
-            checkedDes = "No description";
+        if (!(des.trim().isEmpty() || des.equals("\n"))) {
+            checkedDes = des;
             System.out.println("Chosen description: " + checkedDes);
 
         } else {
-            checkedDes = des;
-            System.out.println("Chosen description: " + checkedDes);
+            System.out.println("No description chosen");
         }
         return checkedDes;
     }
@@ -171,11 +170,11 @@ public class AppManager {
     }
 
     private LocalTime checkReminder(String time) {
-        LocalTime checkedTime = null;
+        LocalTime checkedTime = LocalTime.of(0,0,0);
 
         // Validates user input
         if (time == null || time.trim().isEmpty() || time.equals("\n")) {
-            checkedTime = LocalTime.parse("No reminder");
+            //checkedTime = null;
             System.out.println("No reminder set");
 
             // Checks user input matches HH:mm format
@@ -240,7 +239,7 @@ public class AppManager {
             String newDes = null;
             String newIcon = null;
             LocalTime newTime = null;
-            int newStreak = 0;
+            Integer newStreak = null;
 
             // Loops the menu back to the console until the user chooses to exit the program.
             boolean done = false;
@@ -268,14 +267,16 @@ public class AppManager {
                     }
                     case '4' -> {
                         System.out.print("Enter new reminder time (in 24-hour format, HH:mm): ");
-                        newTime = LocalTime.parse(input.nextLine());
+                        String inputTime = input.nextLine();
+                        newTime = checkReminder(inputTime);
                     }
                     case '5' -> {
                         System.out.print("Enter new streak: ");
                         newStreak = Integer.parseInt(input.nextLine());
                     }
                     case '6' -> {
-                        habitService.deleteHabit(habitName);
+                        habitService.deleteHabit(habit.getHabitId());
+                        //habitService.deleteHabit(habitName);
                         done = true;
                         System.out.println("Habit deleted. Returning to main menu.");
                     }

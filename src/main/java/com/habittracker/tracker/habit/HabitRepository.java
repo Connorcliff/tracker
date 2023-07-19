@@ -11,6 +11,7 @@ public interface HabitRepository extends JpaRepository<Habit, Long> {
 
     // from amigos code
     // SELECT * FROM habit WHERE email = ?
+
     @Query("SELECT h FROM Habit h WHERE h.name = ?1")
     Optional<Habit> findHabitByName(String name);
 
