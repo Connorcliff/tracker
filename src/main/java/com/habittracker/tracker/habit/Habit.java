@@ -23,31 +23,27 @@ public class Habit {
             generator = "habit_sequence"
     )
     private Long id;
+    private Long userId;
     private String name;
     private String description;
-    //private Icon icon; // each icon will have an assigned number
-    private String icon; // will change back to Icon type or make front end read the string and apply the correct image
     private LocalTime reminder;
     private Integer streak;
-
-    public static ArrayList<Icon> iconList = new ArrayList<>();
 
     public Habit() {
 
     }
-    public Habit(Long id, String name, String description, String icon, LocalTime reminder, Integer streak) {
+    public Habit(Long id, Long userId,String name, String description, LocalTime reminder, Integer streak) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.icon = icon;
         this.reminder = reminder;
         this.streak = streak;
     }
 
-    public Habit(String name, String description, String icon, LocalTime reminder, Integer streak) {
+    public Habit(Long userId, String name, String description, LocalTime reminder, Integer streak) {
+        this.userId = userId;
         this.name = name;
         this.description = description;
-        this.icon = icon;
         this.reminder = reminder;
         this.streak = streak;
     }
@@ -58,6 +54,14 @@ public class Habit {
 
     public void setHabitId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId(){
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -76,13 +80,6 @@ public class Habit {
         this.description = description;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
     public LocalTime getReminder() {
         return reminder;
     }
@@ -100,53 +97,11 @@ public class Habit {
 
     @Override
     public String toString() {
-        return  "Name: " + getName() + "\n" +
+        return  "UserId: " + getUserId() + "\n" +
+                "Name: " + getName() + "\n" +
                 "Description: " + getDescription() + "\n" +
-                "Icon: " + getIcon() + "\n" +
                 "Reminder: " + getReminder() + "\n" +
                 "Streak: " + getStreak() + "\n"
                 + "--------------------------------";
     }
 }
-
-
-//    public void setIcon(String userInput) {
-//
-//        // Search for the icon
-//        Icon selectedIcon = null;
-//        for (Icon icon : iconList) {
-//            if (icon.getIconName().equalsIgnoreCase(userInput)) {
-//                selectedIcon = icon;
-//                break;
-//            }
-//        }
-//        // Validates user input
-//        if (selectedIcon == null) {
-//            System.out.println("Invalid icon selected. Please try again.");
-//
-//        } else {
-//            // Set the icon
-//            this.icon = selectedIcon;
-//            System.out.println("Chosen icon: " + selectedIcon.getIconName());
-//        }
-//    }
-//
-//    // Prints the string names of all available icons
-//    public void getIconList() {
-//        System.out.print("Available icons: ");
-//        for (Icon icon : iconList) {
-//            System.out.print(icon.getIconName() + ", ");
-//        }    //todo multiples the list if icon is changed during the same create session
-//    }
-//
-//    public static void addIcons() {
-//        // Populates iconList with available icons
-//        iconList.add(new Icon("leaf"));
-//        iconList.add(new Icon("bike"));
-//        iconList.add(new Icon("cutlery"));
-//        iconList.add(new Icon("paw"));
-//        iconList.add(new Icon("pizza"));
-//        iconList.add(new Icon("smoking"));
-//        iconList.add(new Icon("walk"));
-//    }
-//

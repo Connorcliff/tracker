@@ -1,12 +1,14 @@
 package com.habittracker.tracker.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/user")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -26,6 +28,30 @@ public class UserController {
         userService.addNewUser(user);
     }
 
+    @PostMapping(path = "/login")
+    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
+        // Call the login method in the service and return appropriate response
+        String response = userService.login(email, password);
+        return ResponseEntity.ok(response);
+    }
+
+//    @PostMapping(path = "/login")
+//    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
+//        // Call the login method in the service and return appropriate response
+//        String response = userService.login(email, password);
+//
+////        // Check the response from the service and return appropriate status and message
+////        if (response.equals("SUCCESS")) {
+////            return ResponseEntity.ok("Login successful");
+////        } else if (response.equals("WRONG_PASSWORD")) {
+////            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
+////        } else {
+////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with that email");
+////        }
+//
+//    }
+
+
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
@@ -35,7 +61,9 @@ public class UserController {
     public void updateUser(
             @PathVariable("userId") Long userId,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email){
-        userService.updateUser(userId, name, email);
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String pass
+    ){
+        userService.updateUser(userId, name, email, pass);
     }
 }

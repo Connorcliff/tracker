@@ -26,10 +26,10 @@ public class HabitService {
     }
 
     public void addNewHabit(Habit habit) {
-        Optional<Habit> habitOptional = habitRepository.findHabitByName(habit.getName());
-        if (habitOptional.isPresent()) {
-            throw new IllegalStateException("Email taken");
-        }
+//        Optional<Habit> habitOptional = habitRepository.findHabitByName(habit.getName());
+//        if (habitOptional.isPresent()) {
+//            throw new IllegalStateException("Email taken");
+//        }
         // if email is not present then saves habit
         habitRepository.save(habit);
     }
@@ -52,32 +52,40 @@ public class HabitService {
             habitRepository.deleteById(habitId);
     }
 
-
-
-    public Optional<Habit> getHabitByName(String name) {
-        return habitRepository.findHabitByName(name);
+    // get habits by userId
+    public List<Habit> getHabitsByUserId(Long userId) {
+        return habitRepository.findHabitsByUserId(userId);
     }
+    /** pre findhabitbyuserid */
+//    public Optional<Habit> getHabitByName(String name) {
+//        return habitRepository.findHabitByName(name);
+//    }
 
     @Transactional
-    public void updateHabit(Long habitId, String name, String des, String icon, LocalTime reminder, Integer streak) {
-        Habit habit = habitRepository.findById(habitId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "habit with id " + habitId + " does not exist"));
+    public void updateHabit(Long habitId, Long userId, String name, String des, LocalTime reminder, Integer streak) {
+        Habit habit = habitRepository.findById(habitId).orElseThrow(() ->
+                new IllegalStateException("habit with id " + habitId + " does not exist"));
 
+        // update userId
+        if (des != null && des.length() > 0 && !Objects.equals(habit.getDescription(), des)) {
+            habit.setDescription(des);
+        }
+        /** pre findhabitbyuserid */
+//        // update name
+//        if (name != null && name.length() > 0 && !Objects.equals(habit.getName(), name)) {
+//            Optional<Habit> habitOptional = habitRepository.findHabitByName(name);
+//            if (habitOptional.isPresent()) {
+//                throw new IllegalStateException("name taken");
+//            }
+//            habit.setName(name);
+//        }
         // update name
         if (name != null && name.length() > 0 && !Objects.equals(habit.getName(), name)) {
-            Optional<Habit> habitOptional = habitRepository.findHabitByName(name);
-            if (habitOptional.isPresent()) {
-                throw new IllegalStateException("name taken");
-            }
             habit.setName(name);
         }
         // update description
         if (des != null && des.length() > 0 && !Objects.equals(habit.getDescription(), des)) {
             habit.setDescription(des);
-        }
-        if (icon != null && icon.length() > 0 && !Objects.equals(habit.getIcon(), icon)) {
-            habit.setIcon(icon);
         }
         if (reminder != null && !Objects.equals(habit.getReminder(), reminder)) {
             habit.setReminder(reminder);

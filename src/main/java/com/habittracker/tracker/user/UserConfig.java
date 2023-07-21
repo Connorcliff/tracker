@@ -27,8 +27,14 @@ public class UserConfig {
                     "Password1"
             );
 
+            User one = new User(
+                    "one",
+                    "1",
+                    "1"
+            );
+
             repository.saveAll(
-                    List.of(connor, alex)
+                    List.of(connor, alex, one)
             );
 
             UserManager userManager = new UserManager(repository, userService, habitRunner);

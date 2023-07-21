@@ -53,7 +53,10 @@ static TerminalUI tui = new TerminalUI();
                     System.out.print("Enter password: ");
                     password = input.nextLine();
                 }
-                case '3' -> login(email, password);
+                case '3' -> {
+                    userService.login(email, password);
+                    habitRunner.run();
+                }
                 case '4' -> signupMenu();
                 case 'f' -> {
                     done = true;

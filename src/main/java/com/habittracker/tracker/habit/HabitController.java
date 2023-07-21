@@ -1,10 +1,12 @@
 package com.habittracker.tracker.habit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/habit")
@@ -18,11 +20,24 @@ public class HabitController {
         this.habitService = habitService;
     }
 
+    /** pre findhabitbyuserid */
     // Retrieve information
+//    @GetMapping
+//    public List<Habit> getHabits() {
+//        return habitService.getHabits();
+//    }
+
     @GetMapping
-    public List<Habit> getHabits() {
-        return habitService.getHabits();
+    public List<Habit> getHabits(@RequestParam(required = false) Long userId) {
+        if (userId != null) {
+            // If userId is provided, filter habits by userId
+            return habitService.getHabitsByUserId(userId);
+        } else {
+            // If userId is not provided, return all habits
+            return habitService.getHabits();
+        }
     }
+
 
     // Send information to the database
     @PostMapping
@@ -46,13 +61,13 @@ public class HabitController {
     @PutMapping(path = "{habitId}")
     public void updateHabit(
             @PathVariable("habitId") Long habitId,
+            @RequestParam(required = false) Long userId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String description,
-            @RequestParam(required = false) String icon,
             @RequestParam(required = false) LocalTime reminder,
             @RequestParam(required = false) Integer streak
             ){
-        habitService.updateHabit(habitId, name, description, icon, reminder, streak);
+        habitService.updateHabit(habitId, userId, name, description, reminder, streak);
     }
 
 

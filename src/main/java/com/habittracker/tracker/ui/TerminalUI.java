@@ -32,9 +32,8 @@ public class TerminalUI implements UserInterface {
                     --------------------------------
                     1 - Name (mandatory)
                     2 - Description
-                    3 - Icon
-                    4 - Reminder
-                    5 - Complete
+                    3 - Reminder
+                    4 - Complete
                     f - Go back
                     --------------------------------""");
         System.out.print("Enter option: ");
@@ -51,11 +50,10 @@ public class TerminalUI implements UserInterface {
                     --------------------------------
                     1 - Name
                     2 - Description
-                    3 - Icon
-                    4 - Reminder
-                    5 - Streak
-                    6 - Delete habit
-                    7 - Save changes
+                    3 - Reminder
+                    4 - Streak
+                    5 - Delete habit
+                    6 - Save changes
                     f - Go back
                     --------------------------------""");
         System.out.print("Enter option: ");
