@@ -21,20 +21,32 @@ public class UserConfig {
                     "Pass123"
             );
 
-            User alex = new User(
-                    "Alex",
-                    "alex@hotmail.com",
-                    "Password1"
-            );
-
             User one = new User(
                     "one",
                     "1",
                     "1"
             );
 
+            User alex = new User(
+                    "Alex",
+                    "alex@hotmail.com",
+                    "Password1"
+            );
+
+            User james = new User(
+                    "james",
+                    "james@hotmail.com",
+                    "NewPass"
+            );
+
+            User luca = new User(
+                    "Luca",
+                    "luca@hotmail.com",
+                    "Pass"
+            );
+
             repository.saveAll(
-                    List.of(connor, alex, one)
+                    List.of(connor, one, alex, james, luca)
             );
 
             UserManager userManager = new UserManager(repository, userService, habitRunner);

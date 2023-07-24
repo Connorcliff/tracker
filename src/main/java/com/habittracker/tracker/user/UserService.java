@@ -24,6 +24,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
     public String login(String email, String password) {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
 
