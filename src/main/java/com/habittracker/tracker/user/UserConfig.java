@@ -22,7 +22,7 @@ public class UserConfig {
             );
 
             User one = new User(
-                    "one",
+                    "Claire",
                     "1",
                     "1"
             );
@@ -34,7 +34,7 @@ public class UserConfig {
             );
 
             User james = new User(
-                    "james",
+                    "James",
                     "james@hotmail.com",
                     "NewPass"
             );

@@ -33,41 +33,41 @@ public class HabitConfig {
         return args -> {
             Habit habit0 = new Habit(
                     2L,
-                    "Habit ID 0",
-                    "yoyoyo",
+                    "Clean the dishes",
+                    "",
                     LocalTime.of(11, 11),
                     5
             );
 
             Habit habit1 = new Habit(
                     2L,
-                    "Habit ID 1",
-                    "hello",
-                    LocalTime.of(18, 10),
-                    6
+                    "Daily walk",
+                    "Walk for at least 30 minutes every day",
+                    LocalTime.of(9, 15),
+                    12
             );
 
             Habit habit2 = new Habit(
                     1L,
-                    "Habit ID 2",
-                    "world",
-                    LocalTime.of(10, 55),
+                    "Read my book",
+                    "Read at least 3 pages a day",
+                    LocalTime.of(10, 30),
                     8
             );
 
             Habit habit3 = new Habit(
                     2L,
-                    "Habit ID 3",
-                    "my",
-                    LocalTime.of(10, 55),
+                    "Study for 1 hour",
+                    "",
+                    LocalTime.of(10, 30),
                     10
             );
             Habit habit4 = new Habit(
                     1L,
-                    "Habit ID 4",
-                    "house",
-                    LocalTime.of(10, 55),
-                    45
+                    "Workout",
+                    "workout for 45 minutes",
+                    LocalTime.of(17, 45),
+                    18
             );
 
             repository.saveAll(
