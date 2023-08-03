@@ -12,22 +12,6 @@ import java.util.List;
 @Configuration
 public class HabitConfig {
 
-//    @Bean
-//    @Order(1)
-//    @DependsOn("userCommandLineRunner")
-//    CommandLineRunner HabitCommandLineRunner(HabitRepository repository) {
-//        return args -> {
-//            Habit walk = new Habit(
-//                    "Walk",
-//                    "des",
-//                    null,
-//                    4
-//            );
-//            repository.saveAll(
-//                    List.of(walk)
-//            );
-//        };
-//    }
     @Bean
     CommandLineRunner HabitRunner(HabitRepository repository, HabitService habitService) {
         return args -> {

@@ -20,13 +20,6 @@ public class HabitController {
         this.habitService = habitService;
     }
 
-    /** pre findhabitbyuserid */
-    // Retrieve information
-//    @GetMapping
-//    public List<Habit> getHabits() {
-//        return habitService.getHabits();
-//    }
-
     @GetMapping
     public List<Habit> getHabits(@RequestParam(required = false) Long userId) {
         if (userId != null) {
@@ -38,24 +31,16 @@ public class HabitController {
         }
     }
 
-
     // Send information to the database
     @PostMapping
     public void registerNewHabit(@RequestBody Habit habit) {
         habitService.addNewHabit(habit);
     }
 
-    /** console version */
-//    @DeleteMapping(path = "{habitId}")
-//    public void deleteHabit(@PathVariable("habitId") String habitName) {
-//        habitService.deleteHabit(habitName);
-//    }
-
     @DeleteMapping(path = "{habitId}")
     public void deleteHabit(@PathVariable("habitId") Long habitId) {
         habitService.deleteHabit(habitId);
     }
-
 
     // update information
     @PutMapping(path = "{habitId}")
@@ -69,6 +54,4 @@ public class HabitController {
             ){
         habitService.updateHabit(habitId, userId, name, description, reminder, streak);
     }
-
-
 }
