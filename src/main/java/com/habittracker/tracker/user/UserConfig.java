@@ -49,8 +49,8 @@ public class UserConfig {
                     List.of(connor, one, alex, james, luca)
             );
 
-            UserManager userManager = new UserManager(repository, userService, habitRunner);
-            userManager.loginMenu();
+//            UserManager userManager = new UserManager(repository, userService, habitRunner);
+//            userManager.loginMenu();
 
         };
     }

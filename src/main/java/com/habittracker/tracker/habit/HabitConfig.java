@@ -59,8 +59,8 @@ public class HabitConfig {
             );
 
 
-            AppManager appManager = new AppManager(repository, habitService);
-            appManager.home();
+//            AppManager appManager = new AppManager(repository, habitService);
+//            appManager.home();
         };
     }
 }
