@@ -1,12 +1,11 @@
 package com.habittracker.tracker.habit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping(path = "api/v1/habit")
@@ -20,6 +19,7 @@ public class HabitController {
         this.habitService = habitService;
     }
 
+    // Get method to fetch habits based on the provided userId
     @GetMapping
     public List<Habit> getHabits(@RequestParam(required = false) Long userId) {
         if (userId != null) {
@@ -31,18 +31,19 @@ public class HabitController {
         }
     }
 
-    // Send information to the database
+    // Post method to add a new habit to the database
     @PostMapping
     public void registerNewHabit(@RequestBody Habit habit) {
         habitService.addNewHabit(habit);
     }
 
+    // Delete method to remove a habit from the database
     @DeleteMapping(path = "{habitId}")
     public void deleteHabit(@PathVariable("habitId") Long habitId) {
         habitService.deleteHabit(habitId);
     }
 
-    // update information
+    // Put mapping to update habit data
     @PutMapping(path = "{habitId}")
     public void updateHabit(
             @PathVariable("habitId") Long habitId,

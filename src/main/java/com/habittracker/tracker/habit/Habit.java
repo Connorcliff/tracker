@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalTime;
 
-
 @Entity // This class is an entity which will occupy one row in the database
 @Table // Specifies the details of the table associated with Habit. Same as class name
 public class Habit {
@@ -27,9 +26,11 @@ public class Habit {
     private LocalTime reminder;
     private Integer streak;
 
+    // default constructor
     public Habit() {
-
     }
+
+    // Constructor with all fields
     public Habit(Long id, Long userId,String name, String description, LocalTime reminder, Integer streak) {
         this.id = id;
         this.userId = userId;
@@ -39,6 +40,7 @@ public class Habit {
         this.streak = streak;
     }
 
+    // Constructor with all fields except ID for new friendships
     public Habit(Long userId, String name, String description, LocalTime reminder, Integer streak) {
         this.userId = userId;
         this.name = name;

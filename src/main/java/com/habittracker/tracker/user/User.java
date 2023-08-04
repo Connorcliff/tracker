@@ -20,44 +20,25 @@ public class User {
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
     )
-    private Long id; // make a class to generate unique ids
+    private Long id;
     private String name;
     private String email;
-    private String pass; // todo is password included here?
+    private String pass;
 
-    //List<Habit> habitList = repository.getHabitList();
-    //public static ArrayList<Habit> habitList = new ArrayList<>();
+    // uncomment for termina ui usage
+    /*
+    List<Habit> habitList = repository.getHabitList();
+    public static ArrayList<Habit> habitList = new ArrayList<>();
 
-    //public static ArrayList<User> friendList = new ArrayList<>();
+    public static ArrayList<User> friendList = new ArrayList<>();
 
+     */
+
+    // default constructor
     public User() {
     }
 
-/*    public User(Long userId,
-                String name,
-                String email,
-                String pass,
-                ArrayList habitList,
-                ArrayList friendList) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
-        this.habitList = habitList;
-        this.friendList = friendList;
-    }
-
-    public User(String name,
-                String email,
-                String pass,
-                ArrayList habitList,
-                ArrayList friendList) {
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
-        this.habitList = habitList;
-        this.friendList = friendList;
-    }*/
+    // Constructor with all fields
     public User(Long id, String name, String email, String pass) {
         this.id = id;
         this.name = name;
@@ -65,6 +46,7 @@ public class User {
         this.pass = pass;
     }
 
+    // Constructor with all fields except ID for new friendships
     public User(String name, String email, String pass) {
         this.name = name;
         this.email = email;

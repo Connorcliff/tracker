@@ -1,7 +1,6 @@
 package com.habittracker.tracker.controllers;
 
 import com.habittracker.tracker.habit.Habit;
-import com.habittracker.tracker.habit.HabitController;
 import com.habittracker.tracker.habit.HabitRepository;
 import com.habittracker.tracker.habit.HabitService;
 import com.habittracker.tracker.ui.TerminalUI;
@@ -12,24 +11,42 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 
-
-
+/**
+ * This class represents the AppManager responsible for handling the terminal UI (TUI) of the Habit Tracker application.
+ * It provides methods to manage habits, display menus, and interact with the user through the terminal interface.
+ */
 public class AppManager {
 
     private HabitRepository repository;
     private HabitService habitService;
     static TerminalUI tui = new TerminalUI();
 
+    /**
+     * Constructor to create an instance of AppManager with a HabitRepository.
+     *
+     * @param repository The HabitRepository to use for data storage.
+     */
     public AppManager(HabitRepository repository) {
         this.repository = repository;
     }
 
+    /**
+     * Constructor to create an instance of AppManager with both HabitRepository and HabitService.
+     *
+     * @param repository   The HabitRepository to use for data storage.
+     * @param habitService The HabitService to use for business logic.
+     */
     public AppManager(HabitRepository repository, HabitService habitService) {
         this.repository = repository;
         this.habitService = habitService;
     }
 
-
+    /**
+     * This method displays the home menu to the user and handles user input for different options.
+     * It loops back to the console until the user chooses to exit the program.
+     *
+     * @throws NullPointerException if the HabitService or TerminalUI is not initialized.
+     */
     public void home() throws NullPointerException {
 
         // Loops the menu back to the console until the user chooses to exit the program.
@@ -60,6 +77,10 @@ public class AppManager {
         }
     }
 
+    /**
+     * This method creates a new Habit by getting input from the user and saves it to the repository.
+     * It ensures mandatory fields are provided before saving the new Habit.
+     */
     public void createNewHabit() {
 
         // Create a new instance of Habit
@@ -78,8 +99,6 @@ public class AppManager {
 
             Scanner input = new Scanner(System.in);
             char option = input.next().charAt(0);
-
-            //todo accepts more than one char
 
             // Consumes \n after option
             input.nextLine();
@@ -111,7 +130,6 @@ public class AppManager {
                         habit = new Habit(userId, checkedName, checkedDes, checkedTime, streak);
                         repository.save(habit);
                         done = true;
-                        // todo accepts null input as a habit
                     }
                 }
                 case 'f' -> {
@@ -123,6 +141,12 @@ public class AppManager {
         }
     }
 
+    /**
+     * This method checks if the provided name is valid and returns the checked name.
+     *
+     * @param name The name to be checked.
+     * @return The checked name, or null if the provided name is invalid.
+     */
     private String checkName(String name) {
         String checkedName = null;
 
@@ -137,6 +161,12 @@ public class AppManager {
         return checkedName;
     }
 
+    /**
+     * This method checks if the provided description is valid and returns the checked description.
+     *
+     * @param des The description to be checked.
+     * @return The checked description, or an empty string if the provided description is invalid.
+     */
     private String checkDescription(String des) {
         String checkedDes = "";
 
@@ -151,12 +181,18 @@ public class AppManager {
         return checkedDes;
     }
 
+    /**
+     * This method checks if the provided time is valid and returns the checked time as LocalTime.
+     *
+     * @param time The time to be checked in the format "HH:mm".
+     * @return The checked time as LocalTime.
+     */
     private LocalTime checkReminder(String time) {
         LocalTime checkedTime = LocalTime.of(0, 0, 0);
 
         // Validates user input
         if (time == null || time.trim().isEmpty() || time.equals("\n")) {
-            //checkedTime = null;
+
             System.out.println("No reminder set");
 
             // Checks user input matches HH:mm format
@@ -182,12 +218,20 @@ public class AppManager {
         return checkedTime;
     }
 
+    /**
+     * This method displays the list of habits and their details to the console.
+     */
     public void printHabitsToConsole() {
         tui.displayHabits();
         List<Habit> habits = habitService.getHabits();
         printHabitValues(habits);
     }
 
+    /**
+     * This method prints the habit details in the habit list to the console.
+     *
+     * @param habits The list of habits to print.
+     */
     private void printHabitValues(List<Habit> habits) {
         // Print the habit values to the console
         for (Habit habit : habits) {
@@ -199,7 +243,9 @@ public class AppManager {
         }
     }
 
-
+    /**
+     * This method displays the habit edit menu to the user and handles the editing of existing habits.
+     */
     public void editHabit() {
 
         // Displays existing habits
@@ -252,7 +298,6 @@ public class AppManager {
                     }
                     case '5' -> {
                         habitService.deleteHabit(habit.getHabitId());
-                        //habitService.deleteHabit(habitName);
                         done = true;
                         System.out.println("Habit deleted. Returning to main menu.");
                     }
@@ -274,6 +319,9 @@ public class AppManager {
         }
     }
 
+    /**
+     * This method increases the streak of an existing habit by 1 and updates it in the repository.
+     */
     public void increaseStreak() {
         // Display existing habits
         printHabitsToConsole();

@@ -20,47 +20,44 @@ public class HabitService {
         this.habitRepository = habitRepository;
     }
 
+    // Defines a GET mapping to retrieve all habits
     @GetMapping
     public List<Habit> getHabits() {
         return habitRepository.findAll();
     }
 
+    // Add a new habit to the database
     public void addNewHabit(Habit habit) {
-//        Optional<Habit> habitOptional = habitRepository.findHabitByName(habit.getName());
-//        if (habitOptional.isPresent()) {
-//            throw new IllegalStateException("Email taken");
-//        }
-        // if email is not present then saves habit
         habitRepository.save(habit);
     }
 
-    /** console version */
-//    public void deleteHabit(String habitName) {
-//        Optional<Habit> habitOptional = habitRepository.findHabitByName(habitName);
-//        if (habitOptional.isEmpty()) {
-//            throw new IllegalStateException("Habit with name " + habitName + " does not exist");
-//        }
-//        habitRepository.delete(habitOptional.get());
-//    }
+    // uncomment for terminal version usage
+    /*
+    public void deleteHabit(String habitName) {
+        Optional<Habit> habitOptional = habitRepository.findHabitByName(habitName);
+        if (habitOptional.isEmpty()) {
+            throw new IllegalStateException("Habit with name " + habitName + " does not exist");
+        }
+        habitRepository.delete(habitOptional.get());
+    }
+     */
 
-        public void deleteHabit(Long habitId) {
-            boolean exists = habitRepository.existsById(habitId);
-            if (!exists) {
-                throw new IllegalStateException(
-                        "Habit with id " + habitId + " does not exist");
-            }
-            habitRepository.deleteById(habitId);
+    // delete a habit by its ID
+    public void deleteHabit(Long habitId) {
+        boolean exists = habitRepository.existsById(habitId);
+        if (!exists) {
+            throw new IllegalStateException(
+                    "Habit with id " + habitId + " does not exist");
+        }
+        habitRepository.deleteById(habitId);
     }
 
     // get habits by userId
     public List<Habit> getHabitsByUserId(Long userId) {
         return habitRepository.findHabitsByUserId(userId);
     }
-    /** pre findhabitbyuserid */
-//    public Optional<Habit> getHabitByName(String name) {
-//        return habitRepository.findHabitByName(name);
-//    }
 
+    // Updates habit data of an existing habit
     @Transactional
     public void updateHabit(Long habitId, Long userId, String name, String des, LocalTime reminder, Integer streak) {
         Habit habit = habitRepository.findById(habitId).orElseThrow(() ->
@@ -70,15 +67,6 @@ public class HabitService {
         if (des != null && des.length() > 0 && !Objects.equals(habit.getDescription(), des)) {
             habit.setDescription(des);
         }
-        /** pre findhabitbyuserid */
-//        // update name
-//        if (name != null && name.length() > 0 && !Objects.equals(habit.getName(), name)) {
-//            Optional<Habit> habitOptional = habitRepository.findHabitByName(name);
-//            if (habitOptional.isPresent()) {
-//                throw new IllegalStateException("name taken");
-//            }
-//            habit.setName(name);
-//        }
         // update name
         if (name != null && name.length() > 0 && !Objects.equals(habit.getName(), name)) {
             habit.setName(name);
@@ -90,12 +78,12 @@ public class HabitService {
         if (reminder != null && !Objects.equals(habit.getReminder(), reminder)) {
             habit.setReminder(reminder);
         }
-        if (streak != null) { // maybe update condition?
+        if (streak != null) {
             habit.setStreak(streak);
         }
-
     }
 
+    // updates the streak value of a habit
     @Transactional
     public void increaseStreak(Long habitId, int newStreak) {
         Habit habit = habitRepository.findById(habitId)

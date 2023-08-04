@@ -14,6 +14,7 @@ public class HabitConfig {
 
     @Bean
     CommandLineRunner HabitRunner(HabitRepository repository, HabitService habitService) {
+        // Seeds the database with dummy habit data
         return args -> {
             Habit habit0 = new Habit(
                     2L,
@@ -58,9 +59,12 @@ public class HabitConfig {
                     List.of(habit0, habit1, habit2, habit3, habit4)
             );
 
+/*
+            // uncomment to activate the terminal UI
+            AppManager appManager = new AppManager(repository, habitService);
+            appManager.home();
 
-//            AppManager appManager = new AppManager(repository, habitService);
-//            appManager.home();
+ */
         };
     }
 }

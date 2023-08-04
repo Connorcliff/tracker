@@ -5,7 +5,6 @@ import com.habittracker.tracker.controllers.UserManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class UserConfig {
 
     @Bean
     CommandLineRunner userRunner(UserRepository repository, UserService userService, CommandLineRunner habitRunner) {
+        // seeds the database with dummy user data
         return args -> {
             User connor = new User(
                     "Connor",
@@ -49,8 +49,12 @@ public class UserConfig {
                     List.of(connor, one, alex, james, luca)
             );
 
-//            UserManager userManager = new UserManager(repository, userService, habitRunner);
-//            userManager.loginMenu();
+            // uncomment for terminal ui usage
+            /*
+            UserManager userManager = new UserManager(repository, userService, habitRunner);
+            userManager.loginMenu();
+
+             */
 
         };
     }

@@ -17,6 +17,7 @@ public class FriendshipController {
         this.friendshipService = friendshipService;
     }
 
+    // Get method to fetch friendships based on the provided userId
     @GetMapping
     public List<Friendship> getFriendships(@RequestParam(required = false) Long userId) {
         if (userId != null) {
@@ -28,12 +29,13 @@ public class FriendshipController {
         }
     }
 
-    // Send information to the database
+    // Post method to add a new friendship to the database
     @PostMapping
     public void registerNewFriendship(@RequestBody Friendship friendship) {
         friendshipService.addNewFriendship(friendship);
     }
 
+    // Delete method to remove a friendship from the database
     @DeleteMapping(path = "{id}")
     public void deleteFriendship(@PathVariable("id") Long friendshipId) {
         friendshipService.deleteFriendship(friendshipId);

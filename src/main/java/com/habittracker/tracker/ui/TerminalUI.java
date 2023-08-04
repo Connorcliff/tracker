@@ -3,8 +3,9 @@ package com.habittracker.tracker.ui;
 import com.habittracker.tracker.habit.Habit;
 import com.habittracker.tracker.interfaces.UserInterface;
 
-
-
+/**
+ * Prints terminal UI menus to console
+ */
 public class TerminalUI implements UserInterface {
     @Override
     public void displayHomeMenu() {

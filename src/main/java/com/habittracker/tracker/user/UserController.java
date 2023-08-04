@@ -19,11 +19,14 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    // Get method to fetch all users
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
+    // Get method to fetch users based on the provided userId
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) {
         Optional<User> optionalUser = userService.getUserById(userId);
@@ -36,13 +39,13 @@ public class UserController {
         }
     }
 
-
-
+    // POST method to register a new user
     @PostMapping
     public void registerNewUser(@RequestBody User user) {
         userService.addNewUser(user);
     }
 
+    // POST method to handle user login
     @PostMapping(path = "/login")
     public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
         // Call the login method in the service and return appropriate response
@@ -50,28 +53,13 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping(path = "/login")
-//    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
-//        // Call the login method in the service and return appropriate response
-//        String response = userService.login(email, password);
-//
-////        // Check the response from the service and return appropriate status and message
-////        if (response.equals("SUCCESS")) {
-////            return ResponseEntity.ok("Login successful");
-////        } else if (response.equals("WRONG_PASSWORD")) {
-////            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
-////        } else {
-////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user with that email");
-////        }
-//
-//    }
-
-
+    // DELETE method to delete a user by their userId
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
     }
 
+    // PUT method to update a user's information
     @PutMapping(path = "{userId}")
     public void updateUser(
             @PathVariable("userId") Long userId,

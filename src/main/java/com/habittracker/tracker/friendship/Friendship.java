@@ -19,16 +19,19 @@ public class Friendship {
     private Long id;
     private Long user1Id;
     private Long user2Id;
-    // Other attributes and methods
 
+    // default constructor
     public Friendship() {
     }
 
+    // Constructor with all fields
     public Friendship(Long id, Long user1Id, Long user2Id) {
         this.id = id;
         this.user1Id = user1Id;
         this.user2Id = user2Id;
     }
+
+    // Constructor with all fields except ID for new friendships
     public Friendship(Long user1Id, Long user2Id) {
         this.user1Id = user1Id;
         this.user2Id = user2Id;

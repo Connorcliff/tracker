@@ -19,15 +19,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // Retrieves a list of all users
     @GetMapping
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
+    // retrieves a user by their ID
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
 
+    // Handles user login based on email and password.
     public String login(String email, String password) {
         Optional<User> optionalUser = userRepository.findUserByEmail(email);
 
@@ -46,16 +49,18 @@ public class UserService {
         }
     }
 
+    // Adds a new user to the database
     public void addNewUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
         if (userOptional.isPresent()) {
-            //System.out.println("Email already taken. Please try again");
+
             throw new IllegalStateException("Email taken");
         }
         // if email is not present then saves user
         userRepository.save(user);
     }
 
+    // Deletes a user from the data base based on the provided ID
     public void deleteUser(Long userId) {
         boolean exists = userRepository.existsById(userId);
         if (!exists) {
@@ -65,6 +70,7 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    // Updates habit data of an existing habit
     @Transactional
     public void updateUser(Long userId, String name, String email, String pass) {
         User user = userRepository.findById(userId).orElseThrow(() ->

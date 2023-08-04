@@ -16,20 +16,18 @@ public class FriendshipService {
             this.friendshipRepository = friendshipRepository;
         }
 
+        // Defines a GET mapping to retrieve all friendships
         @GetMapping
         public List<Friendship> getFriendships() {
             return friendshipRepository.findAll();
         }
 
+        // Add a new friendship to the database
         public void addNewFriendship(Friendship friendship) {
-//        Optional<Friendship> friendshipOptional = friendshipRepository.findFriendshipByName(friendship.getName());
-//        if (friendshipOptional.isPresent()) {
-//            throw new IllegalStateException("Email taken");
-//        }
-            // if email is not present then saves friendship
             friendshipRepository.save(friendship);
         }
 
+        // delete a friendship by its ID
         public void deleteFriendship(Long friendshipId) {
             boolean exists = friendshipRepository.existsById(friendshipId);
             if (!exists) {
@@ -39,7 +37,7 @@ public class FriendshipService {
             friendshipRepository.deleteById(friendshipId);
         }
 
-        // get friendships by userId
+        // Get friendships by userId
         public List<Friendship> getFriendshipsById(Long id) {
             return friendshipRepository.findFriendshipsById(id);
         }
