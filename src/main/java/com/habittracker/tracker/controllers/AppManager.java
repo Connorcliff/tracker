@@ -108,7 +108,6 @@ public class AppManager {
                     System.out.print("Enter name: ");
                     String inputName = input.nextLine();
                     checkedName = checkName(inputName);
-
                 }
                 case '2' -> {
                     System.out.print("Enter description: ");
@@ -308,7 +307,6 @@ public class AppManager {
                     case 'f' -> {
                         done = true;
                         System.out.println("Going back...");
-
                     }
                     default -> System.out.println("Invalid input - Please try one of the menu options.");
                 }
